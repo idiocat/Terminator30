@@ -24,7 +24,7 @@ class Program
             foreach (string dir in dirs) {
                 if (DateTime.Now - Directory.GetLastWriteTime(dir) > TimeSpan.FromMinutes(30))
                 {
-                    Terminate(dir);
+                    try { Terminate(dir); } catch (Exception e) { Console.WriteLine($"Error: {e}"); };
                     try { Directory.Delete(dir); } catch { }
                 }
             }
